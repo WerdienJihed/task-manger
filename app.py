@@ -1,45 +1,22 @@
-# start defining classes
+from models.employee import Employee
+from models.role import Role
+from models.state import State
+from models.task import Task
 
 
-class Employee:
-    def __init__(self, id, name, tasks, role):
-        self.id = id
-        self.name = name
-        self.tasks = tasks
-        self.role = role
+# functions
 
-    def change_name(self, name):
-        self.name = name
-
-    def add_task(self, task):
-        self.tasks.append(task)
-
-    def remove_task(self, task):
-        self.tasks.remove(task)
-
-
-class Task:
-    def __init__(self, id, name, state):
-        self.id = id
-        self.name = name
-        self.state = state
-
-    def change_state(self, state):
-        self.state = state
-
-
-class State:
-    def __init__(self, id, name):
-        self.id = id
-        self.name = name
-
-
-class Role:
-    def __init__(self, id, name):
-        self.id = id
-        self.name = name
-
-# end defining classes
+def display_all_employees():
+    for employee in employees:
+        print("id: ", employee.id, ", name : ",
+              employee.name + ", role : ", employee.role.name)
+        print("**** tasks :")
+        if (employee.tasks == []):
+            print("no tasks")
+        else:
+            for task in employee.tasks:
+                print(task.name, ":", task.state.name)
+        print("---")
 
 
 # states
@@ -67,21 +44,19 @@ roles = [admin, normale_employee]
 # employees
 
 
-employee0 = Employee(0, "employee0", [task0, task1], admin)
-employee1 = Employee(1, "employee1", [task2], normale_employee)
-employee2 = Employee(2, "employee2", [], normale_employee)
-
-
+employee0 = Employee(0, "employee0", [
+                     task0, task1], admin, "employee0@gmail.com", "passwordemployee0",)
+employee1 = Employee(1, "employee1", [
+                     task2], normale_employee, "employee1@gmail.com", "passwordemployee1",)
+employee2 = Employee(2, "employee2", [], normale_employee,
+                     "employee2@gmail.com", "passwordemployee2")
 employees = [employee0, employee1, employee2]
 
 
-for employee in employees:
-    print("id: ", employee.id, ", name : ",
-          employee.name + ", role : ", employee.role.name)
-    print("**** tasks :")
-    if (employee.tasks == []):
-        print("no tasks")
-    else:
-        for task in employee.tasks:
-            print(task.name)
-    print("---")
+display_all_employees()
+
+task3 = Task(3, "task3", not_started)
+
+employee0.add_task(task3)
+
+display_all_employees()
